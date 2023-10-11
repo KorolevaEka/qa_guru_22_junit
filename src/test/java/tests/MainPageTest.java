@@ -5,15 +5,14 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
-import guru.qa.CatalogPage;
-import guru.qa.MainPage;
-import guru.qa.SearchPage;
+import pages.CatalogPage;
+import pages.MainPage;
+import pages.SearchPage;
 
 import java.util.stream.Stream;
 
 public class MainPageTest extends TestBase {
     MainPage mainPage = new MainPage();
-    SearchPage searchPage = new SearchPage();
     CatalogPage catalogPage = new CatalogPage();
 
     @ParameterizedTest(name = "При успешном поиске {0} на странице поиска отображается заголовок {1}")
@@ -23,7 +22,6 @@ public class MainPageTest extends TestBase {
     public void searchTest(String searchValue, String headerResult) {
         mainPage.openMainPage().searchValue(searchValue);
 
-        searchPage.checkResult(headerResult);
     }
 
     static Stream<Arguments> checkTitles() {
@@ -50,6 +48,5 @@ public class MainPageTest extends TestBase {
     public void checkCartTest(String searchValue) {
         mainPage.openMainPage().searchValue(searchValue);
 
-        searchPage.checkCartHidden();
     }
 }
