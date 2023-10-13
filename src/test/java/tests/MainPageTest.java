@@ -44,7 +44,7 @@ public class MainPageTest extends TestBase {
     }
 
     @ParameterizedTest
-    @DisplayName("При поиске боковая панель корзины видна")
+    @DisplayName("При поиске боковая панель корзины скрыта")
     @Tags({@Tag("UI"), @Tag("Cart"), @Tag("Regress")})
     @ValueSource(strings = {"шампунь", "мыло"})
     public void checkCartTest(String searchValue) {
