@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 public class MainPageTest extends TestBase {
     MainPage mainPage = new MainPage();
     CatalogPage catalogPage = new CatalogPage();
+    SearchPage searchPage = new SearchPage();
 
     @ParameterizedTest(name = "При успешном поиске {0} на странице поиска отображается заголовок {1}")
     @Tags({@Tag("UI"), @Tag("Search"), @Tag("Smoke")})
@@ -21,11 +22,12 @@ public class MainPageTest extends TestBase {
     @CsvFileSource(resources = "/Lavka.csv")
     public void searchTest(String searchValue, String headerResult) {
         mainPage.openMainPage().searchValue(searchValue);
-
+        searchPage.checkResult(headerResult);
     }
 
     static Stream<Arguments> checkTitles() {
-        return Stream.of(Arguments.of("Вам понравится", "Вам понравится"),
+        return Stream.of(
+                Arguments.of("Вам понравится", "Вам понравится"),
                 Arguments.of("Придумано Яндекс Лавкой", "Всё «Из Лавки»"),
                 Arguments.of("Точно хватит", "Точно хватит")
         );
@@ -42,11 +44,12 @@ public class MainPageTest extends TestBase {
     }
 
     @ParameterizedTest
-    @DisplayName("При поиске боковая панель корзины скрыта")
+    @DisplayName("При поиске боковая панель корзины видна")
     @Tags({@Tag("UI"), @Tag("Cart"), @Tag("Regress")})
     @ValueSource(strings = {"шампунь", "мыло"})
     public void checkCartTest(String searchValue) {
         mainPage.openMainPage().searchValue(searchValue);
+        searchPage.checkCartUnvisible();
 
     }
 }
