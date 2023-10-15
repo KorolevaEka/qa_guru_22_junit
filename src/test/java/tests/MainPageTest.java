@@ -44,12 +44,12 @@ public class MainPageTest extends TestBase {
     }
 
     @ParameterizedTest
-    @DisplayName("При поиске попап корзины скрыт")
+    @DisplayName("При поиске виден текст Вот что мы нашли")
     @Tags({@Tag("UI"), @Tag("Cart"), @Tag("Regress")})
     @ValueSource(strings = {"шампунь", "мыло"})
     public void checkCartTest(String searchValue) {
         mainPage.openMainPage().searchValue(searchValue);
-        searchPage.checkCartUnvisible();
+        searchPage.checkTextMessageVisible();
 
     }
 }
